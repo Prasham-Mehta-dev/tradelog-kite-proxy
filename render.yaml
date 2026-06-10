@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: tradelog-kite-proxy
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn kite_oauth_proxy:app --bind 0.0.0.0:$PORT --workers 1 --timeout 30
+    envVars:
+      - key: KITE_API_KEY
+        sync: false
+      - key: KITE_API_SECRET
+        sync: false
